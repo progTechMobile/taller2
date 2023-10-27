@@ -15,6 +15,38 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <h2>Guests:</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Edad</th>
+                                <th>Hora de Ingreso</th>
+                                <th>Cantidad de Acompañantes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($guests as $guest)
+                                <tr>
+                                    <td>{{ $guest->nombre }}</td>
+                                    <td>{{ $guest->apellido }}</td>
+                                    <td>{{ $guest->edad }}</td>
+                                    <td>{{ $guest->horaIngreso }}</td>
+                                    <td>{{ $guest->cAcompanantes }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ route('guests.destroy', ['id' => $guest->id]) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

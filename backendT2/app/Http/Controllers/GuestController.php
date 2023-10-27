@@ -17,7 +17,7 @@ class GuestController extends Controller
     {
         //
         $guests = Guest::all();
-        return $guests;
+        return view('home', ['guests' => $guests]);
     }
 
     /**
@@ -99,9 +99,11 @@ class GuestController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $guests = Guest::find($id);
-        $guests -> delete();
-        return $guests;
+        $guest = Guest::find($id);
+        if ($guest) {
+            $guest->delete();
+            return redirect()->route('home')->with('status', 'Guest deleted successfully');
+        }
+        return redirect()->route('home')->with('status', 'Guest not found');
     }
-}
+};

@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [GuestController::class, 'index'])->name('home');
+Route::delete('/guests/{id}', [GuestController::class, 'destroy'])->name('guests.destroy');
